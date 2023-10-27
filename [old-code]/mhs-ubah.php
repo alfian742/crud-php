@@ -8,45 +8,131 @@
         <h5 class="card-title mb-4">Ubah Mahasiswa</h5>
 
         <?php
-        include "connection.php";
+        // Code Pak Multazam
+        // include 'connection.php';
+
+        // $nim = $_GET['nim'];
+
+        // if (isset($nim)) {
+        //     $mahasiswa = mysqli_query($db, "SELECT * FROM tb_mahasiswa WHERE nim = '$nim'");
+        //     $result = mysqli_fetch_array($mahasiswa);
+        // } else {
+        //     header('location: mhs-data.php');
+        // }
+
+        // if (isset($_POST['simpan'])) {
+        //     $nama = $_POST['nama'];
+        //     $prodi = $_POST['prodi'];
+        //     $semester = $_POST['semester'];
+        //     $alamat = $_POST['alamat'];
+        //     $jenis_kelamin = $_POST['jenis_kelamin'];
+        //     $foto = $_FILES['foto']['name'];
+        //     $tmp = $_FILES['foto']['tmp_name'];
+
+        //     if (strlen($foto) > 0) {
+        //         $sql = "UPDATE tb_mahasiswa SET 
+        //                 nama = '$nama',
+        //                 prodi = '$prodi',
+        //                 semester = '$semester',
+        //                 alamat = '$alamat',
+        //                 jenis_kelamin = '$jenis_kelamin',
+        //                 foto = '$foto'
+        //                 WHERE nim = '$nim'";
+
+        //         $query = mysqli_query($db, $sql);
+
+        //         move_uploaded_file($tmp, 'img/' . $foto);
+        //     } else {
+        //         $sql = "UPDATE tb_mahasiswa SET 
+        //                 nama = '$nama',
+        //                 prodi = '$prodi',
+        //                 semester = '$semester',
+        //                 alamat = '$alamat',
+        //                 jenis_kelamin = '$jenis_kelamin'
+        //                 WHERE nim = '$nim'";
+
+        //         $query = mysqli_query($db, $sql);
+        //     }
+        //     if ($query) {
+        //         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        //                 <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="mhs-data.php">disini</a>.
+        //                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        //             </div>';
+        //     } else {
+        //         echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        //                 <strong>Data gagal disimpan!</strong> Silahkan coba kembali.
+        //                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        //             </div>';
+        //     }
+        // }
+
+        include 'connection.php';
 
         $nim = $_GET['nim'];
-        $mhs = mysqli_query($db, "SELECT * FROM tb_mahasiswa WHERE nim = '$nim'");
-        $result = mysqli_fetch_array($mhs);
+
+        if (isset($nim)) {
+            $mahasiswa = mysqli_query($db, "SELECT * FROM tb_mahasiswa WHERE nim = '$nim'");
+            $result = mysqli_fetch_array($mahasiswa);
+        } else {
+            header('location: mhs-data.php');
+        }
 
         if (isset($_POST['simpan'])) {
-            $nim = $_POST['nim'];
             $nama = $_POST['nama'];
             $prodi = $_POST['prodi'];
             $semester = $_POST['semester'];
             $alamat = $_POST['alamat'];
             $jenis_kelamin = $_POST['jenis_kelamin'];
-            $foto = $_FILES['foto']['name'];
+
+            $fotoName = $_FILES['foto']['name'];
             $tmp = $_FILES['foto']['tmp_name'];
 
-            $sql = "UPDATE tb_mahasiswa SET
-                    nama = '$nama',
-                    prodi = '$prodi',
-                    semester = '$semester',
-                    alamat = '$alamat',
-                    jenis_kelamin = '$jenis_kelamin',
-                    foto = '$foto'
-                    WHERE nim = '$nim'";
+            if (strlen($fotoName) > 0) {
+                $fileExtension = pathinfo($fotoName, PATHINFO_EXTENSION);
+                $randomFotoName = uniqid() . '.' . $fileExtension;
 
-            $query = mysqli_query($db, $sql);
+                if (move_uploaded_file($tmp, 'img/' . $randomFotoName)) {
+                    $foto = $randomFotoName;
 
-            move_uploaded_file($tmp, "img/$foto");
+                    if ($result['foto']) {
+                        $oldFoto = 'img/' . $result['foto'];
+                        if (file_exists($oldFoto))
+                            unlink($oldFoto);
+                    }
+                }
+
+                $sql = "UPDATE tb_mahasiswa SET 
+                        nama = '$nama',
+                        prodi = '$prodi',
+                        semester = '$semester',
+                        alamat = '$alamat',
+                        jenis_kelamin = '$jenis_kelamin',
+                        foto = '$foto'
+                        WHERE nim = '$nim'";
+
+                $query = mysqli_query($db, $sql);
+            } else {
+                $sql = "UPDATE tb_mahasiswa SET 
+                        nama = '$nama',
+                        prodi = '$prodi',
+                        semester = '$semester',
+                        alamat = '$alamat',
+                        jenis_kelamin = '$jenis_kelamin'
+                        WHERE nim = '$nim'";
+
+                $query = mysqli_query($db, $sql);
+            }
 
             if ($query) {
-                echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href='mhs-data.php'>disini</a>.
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            </div>";
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="mhs-data.php">disini</a>.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
             } else {
-                echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                <strong>Data gagal disimpan!</strong> Silahkan coba kembali.
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            </div>";
+                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Data gagal disimpan!</strong> Silahkan coba kembali.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
             }
         }
         ?>
@@ -121,12 +207,19 @@
             <div class="row mb-3">
                 <label for="foto" class="col-sm-4 col-form-label">Foto</label>
                 <div class="col-sm-8">
-                    <input class="form-control" type="file" id="foto" name="foto" required>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <input class="form-control" type="file" id="foto" name="foto">
+                        </div>
+                        <div class="col-sm-3">
+                            <img src="img/<?= $result['foto']; ?>" alt="<?= $result['nama']; ?>" class="object-fit-cover rounded-2 shadow-sm" width="100" height="100">
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <button type="submit" name="simpan" class="btn btn-primary">Simpan</button>
-            <button type="reset" class="btn btn-warning">Batal</button>
+            <a href="mhs-data.php" class="btn btn-warning">Batal</a>
         </form>
     </div>
 </div>
