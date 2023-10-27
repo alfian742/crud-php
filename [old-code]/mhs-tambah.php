@@ -8,7 +8,39 @@
         <h5 class="card-title mb-4">Tambah Mahasiswa</h5>
 
         <?php
-        include "connection.php";
+        // Code Pak Multazam
+        // include 'connection.php';
+
+        // if (isset($_POST['simpan'])) {
+        //     $nim = $_POST['nim'];
+        //     $nama = $_POST['nama'];
+        //     $prodi = $_POST['prodi'];
+        //     $semester = $_POST['semester'];
+        //     $alamat = $_POST['alamat'];
+        //     $jenis_kelamin = $_POST['jenis_kelamin'];
+        //     $foto = $_FILES['foto']['name'];
+        //     $tmp = $_FILES['foto']['tmp_name'];
+
+        //     $sql = "INSERT INTO tb_mahasiswa VALUES('$nim','$nama','$prodi','$semester', '$alamat','$jenis_kelamin','$foto')";
+
+        //     $query = mysqli_query($db, $sql);
+
+        //     move_uploaded_file($tmp, 'img/' . $foto);
+
+        //     if ($query) {
+        //         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        //                 <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="mhs-data.php">disini</a>.
+        //                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        //             </div>';
+        //     } else {
+        //         echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        //                 <strong>Data gagal disimpan!</strong> Silahkan coba kembali.
+        //                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        //             </div>';
+        //     }
+        // }
+
+        include 'connection.php';
 
         if (isset($_POST['simpan'])) {
             $nim = $_POST['nim'];
@@ -17,26 +49,39 @@
             $semester = $_POST['semester'];
             $alamat = $_POST['alamat'];
             $jenis_kelamin = $_POST['jenis_kelamin'];
-            $foto = $_FILES['foto']['name'];
+
+            $fotoName = $_FILES['foto']['name'];
             $tmp = $_FILES['foto']['tmp_name'];
 
-            $sql = "INSERT INTO tb_mahasiswa 
-                    VALUES('$nim','$nama','$prodi','$semester', '$alamat','$jenis_kelamin','$foto')";
-
-            $query = mysqli_query($db, $sql);
-
-            move_uploaded_file($tmp, "img/$foto");
-
-            if ($query) {
-                echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-                <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href='mhs-data.php'>disini</a>.
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            </div>";
+            $nimCheck = mysqli_query($db, "SELECT nim FROM tb_mahasiswa WHERE nim = '$nim'");
+            if (mysqli_num_rows($nimCheck) > 0) {
+                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>NIM sudah terdaftar!</strong> Silahkan coba kembali.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
             } else {
-                echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
-                <strong>Data gagal disimpan!</strong> Silahkan coba kembali.
-                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
-            </div>";
+                $fileExtension = pathinfo($fotoName, PATHINFO_EXTENSION);
+                $randomFotoName = uniqid() . '.' . $fileExtension;
+
+                if (move_uploaded_file($tmp, 'img/' . $randomFotoName)) {
+                    $foto = $randomFotoName;
+                };
+
+                $sql = "INSERT INTO tb_mahasiswa VALUES('$nim','$nama','$prodi','$semester', '$alamat','$jenis_kelamin','$foto')";
+
+                $query = mysqli_query($db, $sql);
+
+                if ($query) {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="mhs-data.php">disini</a>.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                } else {
+                    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Data gagal disimpan!</strong> Silahkan coba kembali.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                }
             }
         }
         ?>
