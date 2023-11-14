@@ -15,12 +15,12 @@
     </div>
 
     <!-- dataTables js -->
-    <script src="vendor/datatables/js/jquery-3.3.1.slim.min.js"></script>
-    <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
+    <script src="../vendor/datatables/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="../vendor/datatables/js/dataTables.bootstrap4.min.js"></script>
 
     <!-- Bootstrap js bundle with @popper -->
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom script -->
     <script>

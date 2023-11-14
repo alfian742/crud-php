@@ -7,13 +7,13 @@
     <title>SIAKAD</title>
 
     <!-- Bootstrap css -->
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
 
     <!-- dataTables css -->
-    <link rel="stylesheet" href="vendor/datatables/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../vendor/datatables/css/dataTables.bootstrap4.min.css">
 
     <!-- Fontawesome icons -->
-    <link rel="stylesheet" href="vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../vendor/fontawesome-free/css/all.min.css">
 </head>
 
 <body>

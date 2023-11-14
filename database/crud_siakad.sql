@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 20 Okt 2023 pada 15.16
+-- Waktu pembuatan: 14 Nov 2023 pada 15.15
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mahasiswa`
+-- Database: `crud_siakad`
 --
 
 -- --------------------------------------------------------
@@ -36,13 +36,6 @@ CREATE TABLE `tb_mahasiswa` (
   `jenis_kelamin` varchar(1) DEFAULT NULL,
   `foto` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `tb_mahasiswa`
---
-
-INSERT INTO `tb_mahasiswa` (`nim`, `nama`, `prodi`, `semester`, `alamat`, `jenis_kelamin`, `foto`) VALUES
-('19TI025', 'Alfian Hidayat', 'Teknik Informatika', 7, 'Mataram', 'L', '6531181d06df5.jpg');
 
 --
 -- Indexes for dumped tables

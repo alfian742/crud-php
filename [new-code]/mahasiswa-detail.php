@@ -11,11 +11,14 @@
         </div>
 
         <?php
-        include 'connection.php';
+        include 'connection.php'; // Mengimpor file koneksi ke database
 
-        $nim = $_GET['nim'];
+        $nim = $_GET['nim']; // Mendapatkan NIM mahasiswa dari parameter URL
 
+        // Mengambil data mahasiswa berdasarkan NIM dari tabel tb_mahasiswa
         $mahasiswa = mysqli_query($db, "SELECT * FROM tb_mahasiswa WHERE nim = '$nim'");
+
+        // Mengambil hasil query dan menyimpannya dalam bentuk array
         $result = mysqli_fetch_array($mahasiswa);
         ?>
 
@@ -49,7 +52,7 @@
                         <tr>
                             <td>Jenis Kelamin</td>
                             <td>:</td>
-                            <td><?= ($result['jenis_kelamin'] == 'L') ? 'Laki-Laki' : ''; ?><?= ($result['jenis_kelamin'] == 'P') ? 'Perempuan' : ''; ?></td>
+                            <td><?= ($result['jenis_kelamin'] == 'L') ? 'Laki-Laki' : (($result['jenis_kelamin'] == 'P') ? 'Perempuan' : ''); ?></td>
                         </tr>
                         <tr>
                             <td>Alamat</td>
