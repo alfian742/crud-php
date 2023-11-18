@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include 'connection.php'; // Mengimpor file koneksi ke database
 
 $nim = $_GET['nim']; // Mendapatkan NIM mahasiswa dari parameter URL

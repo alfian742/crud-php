@@ -14,6 +14,53 @@
 
     <!-- Fontawesome icons -->
     <link rel="stylesheet" href="../vendor/fontawesome-free/css/all.min.css">
+
+    <!-- Custom css -->
+    <style>
+        .img-detail {
+            width: 180px;
+            height: 180px;
+            margin-top: 0.8rem;
+        }
+
+        .img-preview {
+            width: 100px;
+            height: 100px;
+        }
+
+        @media (max-width: 575px) {
+
+            .img-detail,
+            .img-preview {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 1rem;
+                width: 150px;
+                height: 150px;
+            }
+
+            .element-center {
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .btn-block {
+                width: 100%;
+            }
+
+            .img-detail {
+                width: 120px;
+                height: 120px;
+                margin-top: 0.8rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -26,9 +73,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav text-center me-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="index.php">Beranda</a>
+                            <a class="nav-link active" href="beranda.php">Beranda</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" href="#">Akademik</a>
@@ -40,6 +87,7 @@
                             <a class="nav-link active" href="#">Pembayaran</a>
                         </li>
                     </ul>
+                    <a href="logout.php" class="btn btn-sm btn-outline-light btn-block">Logout</a>
                 </div>
             </div>
         </nav>
@@ -50,7 +98,7 @@
             <div class="col-md-2 mb-4">
                 <!-- List menu -->
                 <div class="list-group">
-                    <a href="index.php" class="list-group-item list-group-item-action active">Beranda</a>
+                    <a href="beranda.php" class="list-group-item list-group-item-action active">Beranda</a>
                     <a href="mahasiswa-data.php" class="list-group-item list-group-item-action">Data Mahasiswa</a>
                     <a href="#" class="list-group-item list-group-item-action">Data Dosen</a>
                     <a href="#" class="list-group-item list-group-item-action">Data Kelas</a>

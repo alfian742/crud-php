@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include 'koneksi.php'; // Import file koneksi
 
 // Mengambil data sesuai dengan parameter
