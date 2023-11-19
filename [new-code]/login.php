@@ -45,8 +45,9 @@ session_start();
                                         $_SESSION['nama_lengkap'] = $data['nama_lengkap'];
                                         header("Location: beranda.php");
                                     } else {
-                                        echo '<div class="alert alert-warning text-center" role="alert">
-                                                <strong>Email atau Password salah!</strong><br> Silahkan coba kembali.
+                                        echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <strong>Email atau Password salah!</strong> Silahkan coba kembali.
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                             </div>';
                                     }
                                 }
@@ -87,7 +88,7 @@ session_start();
     </div>
 
     <!-- Bootstrap js bundle with @popper -->
-    <script src="../vendor/js/bootstrap.bundle.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

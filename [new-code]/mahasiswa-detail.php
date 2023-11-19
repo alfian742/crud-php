@@ -74,7 +74,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
 <?php
     include 'template/_footer.php';
 } else {
-    echo '<div style="text-align: center; color: red; margin-top: 5rem;">
+    echo '<div style="font-family: Arial, Helvetica, sans-serif; font-size: large; text-align: center; color: red; margin-top: 5rem;">
             <h5>Tidak dapat mengakses halaman ini, silahkan login terlebih dahulu. <a href="login.php">LOGIN</a></h5>
         </div>';
 } ?>
