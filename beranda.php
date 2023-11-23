@@ -52,27 +52,29 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                     <!-- List menu -->
                     <div class="list-group">
                         <a href="beranda.php" class="list-group-item list-group-item-action active">Beranda</a>
-                        <a href="mhsdata.php" class="list-group-item list-group-item-action">Data Mahasiswa</a>
-                        <a href="#" class="list-group-item list-group-item-action">Data Dosen</a>
-                        <a href="#" class="list-group-item list-group-item-action">Data Kelas</a>
-                        <a href="#" class="list-group-item list-group-item-action">Data Mata Kuliah</a>
+                        <?php if ($_SESSION['level'] == "Mahasiswa") { ?>
+                            <a href="#" class="list-group-item list-group-item-action">Update Profile</a>
+                            <a href="#" class="list-group-item list-group-item-action">Isi KRS</a>
+                            <a href="#" class="list-group-item list-group-item-action">Jadwal Kuliah</a>
+                            <a href="#" class="list-group-item list-group-item-action">Lihat KHS</a>
+                            <a href="#" class="list-group-item list-group-item-action">Pembayaran</a>
+                        <?php } elseif ($_SESSION['level'] == "Dosen") { ?>
+                            <a href="#" class="list-group-item list-group-item-action">Update Profile</a>
+                            <a href="#" class="list-group-item list-group-item-action">Cek KRS</a>
+                            <a href="#" class="list-group-item list-group-item-action">Jadwal Mengajar</a>
+                            <a href="#" class="list-group-item list-group-item-action">Input Nilai</a>
+                        <?php } elseif ($_SESSION['level'] == "Admin") { ?>
+                            <a href="?page=mhsdata" class="list-group-item list-group-item-action">Data Mahasiswa</a>
+                            <a href="#" class="list-group-item list-group-item-action">Data Dosen</a>
+                            <a href="#" class="list-group-item list-group-item-action">Reset Password</a>
+                            <a href="#" class="list-group-item list-group-item-action">Pengaturan Website</a>
+                        <?php } ?>
                     </div>
                     <!-- End of list menu -->
                 </div>
                 <div class="col-md-9 mb-4">
-                    <!-- Content -->
-                    <div class="card">
-                        <div class="card-header text-bg-primary fw-medium">
-                            BERANDA
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Selamat Datang di Halaman Admin!</h5>
-                            <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis ea esse maxime placeat reiciendis reprehenderit accusamus! Incidunt tempora consequuntur ratione laboriosam numquam ex nisi vel vero earum! Aperiam saepe placeat, unde facilis quidem, perferendis quis, voluptate excepturi quos sit beatae? Illum libero, dolores vitae amet ipsum ab sint aliquam exercitationem officia, delectus, suscipit placeat culpa quod deleniti accusantium dolorem reprehenderit cumque unde pariatur quaerat nam alias. Molestias, nobis. Ipsam natus pariatur ipsum dolorum voluptatum voluptas.</p>
-                            <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis ea esse maxime placeat reiciendis reprehenderit accusamus! Incidunt tempora consequuntur ratione laboriosam numquam ex nisi vel vero earum! Aperiam saepe placeat, unde facilis quidem, perferendis quis, voluptate excepturi quos sit beatae? Illum libero, dolores vitae amet ipsum ab sint aliquam exercitationem officia, delectus, suscipit placeat culpa quod deleniti accusantium dolorem reprehenderit cumque unde pariatur quaerat nam alias. Molestias, nobis. Ipsam natus pariatur ipsum dolorum voluptatum voluptas.</p>
-                            <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis ea esse maxime placeat reiciendis reprehenderit accusamus! Incidunt tempora consequuntur ratione laboriosam numquam ex nisi vel vero earum! Aperiam saepe placeat, unde facilis quidem, perferendis quis, voluptate excepturi quos sit beatae? Illum libero, dolores vitae amet ipsum ab sint aliquam exercitationem officia, delectus, suscipit placeat culpa quod deleniti accusantium dolorem reprehenderit cumque unde pariatur quaerat nam alias. Molestias, nobis. Ipsam natus pariatur ipsum dolorum voluptatum voluptas.</p>
-                        </div>
-                    </div>
-                    <!-- End of content -->
+                    <?php include 'konten.php'; // Import konten di setiap halaman 
+                    ?>
                 </div>
             </div>
             <!-- End of list menu & content -->

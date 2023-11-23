@@ -12,8 +12,10 @@ if (isset($_GET['nim'])) {
     $query = mysqli_query($koneksi, $sql);
 
     if ($query) {
-        header('Location: mhsdata.php'); // Jika berhasil kembali ke tampil data
+        header("Location: ?page=mhsdata"); // Jika berhasil kembali ke tampil data
     } else {
-        header('Location: mhsdata.php'); // Jika gagal kembali ke tampil data
+        header("Location: ?page=mhsdata"); // Jika gagal kembali ke tampil data
     }
+} else {
+    header("Location: ?page=mhsdata"); // Jika tidak ada parameter kembali ke tampil data
 }
