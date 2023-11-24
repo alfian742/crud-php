@@ -93,7 +93,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
         </div>
 
         <!-- Script -->
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     </body>
 
     </html>
