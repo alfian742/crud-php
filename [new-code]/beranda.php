@@ -10,14 +10,13 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
             BERANDA
         </div>
         <div class="card-body">
-            <h5 class="card-title">Selamat Datang di Halaman Admin!</h5>
+            <h5 class="card-title">Selamat Datang saudara <?= $_SESSION['nama_lengkap']; ?>!</h5>
             <p class="card-text">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, quia. Omnis ad nulla, perspiciatis eius unde accusantium vero alias tenetur, tempora nemo dicta reprehenderit rem nobis sunt optio dolores corporis corrupti iste harum nihil quod? Doloribus, eaque vel. Repellat explicabo distinctio deleniti hic totam in similique non officia ut dolorum tempora, nostrum cupiditate ullam ab porro aspernatur doloremque, magnam itaque quasi nemo fugiat consequatur quaerat laudantium quam. Ex aperiam consequuntur fuga! Similique temporibus ducimus aliquam, laborum sint neque dignissimos facilis voluptates ea tempore alias vel earum ipsam doloribus! Asperiores exercitationem molestias, nihil nesciunt, a eaque ad in eius fuga maiores laboriosam, obcaecati maxime ut accusamus quis possimus? Voluptas error fugit optio. Distinctio iusto at eveniet! Molestiae nobis dolorum enim! Totam, soluta consequatur fuga quisquam explicabo magnam doloremque ex quis reprehenderit porro eum minima adipisci ratione rem itaque tempore mollitia architecto. Cumque similique consequuntur nostrum ut enim quibusdam quisquam. Accusamus, tenetur.
             </p>
             <p class="card-text">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, quia. Omnis ad nulla, perspiciatis eius unde accusantium vero alias tenetur, tempora nemo dicta reprehenderit rem nobis sunt optio dolores corporis corrupti iste harum nihil quod? Doloribus, eaque vel. Repellat explicabo distinctio deleniti hic totam in similique non officia ut dolorum tempora, nostrum cupiditate ullam ab porro aspernatur doloremque, magnam itaque quasi nemo fugiat consequatur quaerat laudantium quam. Ex aperiam consequuntur fuga! Similique temporibus ducimus aliquam, laborum sint neque dignissimos facilis voluptates ea tempore alias vel earum ipsam doloribus! Asperiores exercitationem molestias, nihil nesciunt, a eaque ad in eius fuga maiores laboriosam, obcaecati maxime ut accusamus quis possimus? Voluptas error fugit optio. Distinctio iusto at eveniet! Molestiae nobis dolorum enim! Totam, soluta consequatur fuga quisquam explicabo magnam doloremque ex quis reprehenderit porro eum minima adipisci ratione rem itaque tempore mollitia architecto. Cumque similique consequuntur nostrum ut enim quibusdam quisquam. Accusamus, tenetur.
             </p>
-            <a href="mahasiswa-data.php" class="btn btn-primary">Data Mahasiswa</a>
         </div>
     </div>
 
