@@ -11,7 +11,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
         <title>SIAKAD</title>
 
         <!-- Bootstrap css -->
-        <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     </head>
 
     <body>
@@ -55,18 +55,16 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                         <?php if ($_SESSION['level'] == "Mahasiswa") { ?>
                             <a href="#" class="list-group-item list-group-item-action">Update Profile</a>
                             <a href="#" class="list-group-item list-group-item-action">Isi KRS</a>
-                            <a href="#" class="list-group-item list-group-item-action">Jadwal Kuliah</a>
                             <a href="#" class="list-group-item list-group-item-action">Lihat KHS</a>
-                            <a href="#" class="list-group-item list-group-item-action">Pembayaran</a>
                         <?php } elseif ($_SESSION['level'] == "Dosen") { ?>
-                            <a href="#" class="list-group-item list-group-item-action">Update Profile</a>
+                            <a href="#" class="list-group-item list-group-item-action">Ubah Profil</a>
                             <a href="#" class="list-group-item list-group-item-action">Cek KRS</a>
-                            <a href="#" class="list-group-item list-group-item-action">Jadwal Mengajar</a>
                             <a href="#" class="list-group-item list-group-item-action">Input Nilai</a>
                         <?php } elseif ($_SESSION['level'] == "Admin") { ?>
+                            <a href="#" class="list-group-item list-group-item-action">Ubah Profil</a>
                             <a href="?page=mhsdata" class="list-group-item list-group-item-action">Data Mahasiswa</a>
-                            <a href="#" class="list-group-item list-group-item-action">Data Dosen</a>
-                            <a href="#" class="list-group-item list-group-item-action">Reset Password</a>
+                            <a href="?page=dsndata" class="list-group-item list-group-item-action">Data Dosen</a>
+                            <a href="?page=mkdata" class="list-group-item list-group-item-action">Data Mata Kuliah</a>
                             <a href="#" class="list-group-item list-group-item-action">Pengaturan Website</a>
                         <?php } ?>
                     </div>
@@ -93,7 +91,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
         </div>
 
         <!-- Script -->
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
     </body>
 
     </html>

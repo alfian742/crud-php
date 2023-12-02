@@ -1,29 +1,28 @@
 <!-- Content -->
 <div class="card">
     <div class="card-header text-bg-primary fw-medium">
-        DATA MAHASISWA
+        DATA DOSEN
     </div>
     <div class="card-body">
-        <h5 class="card-title mb-4">Ubah Data Mahasiswa</h5>
+        <h5 class="card-title mb-4">Ubah Data Dosen</h5>
 
         <?php
         include 'koneksi.php'; // Import file koneksi
 
         // Mengambil data sesuai dengan parameter
-        if (isset($_GET['nim'])) {
-            $nim = $_GET['nim'];
-            $mahasiswa = mysqli_query($koneksi, "SELECT * FROM tb_mahasiswa WHERE nim = '$nim'");
-            $hasil = mysqli_fetch_array($mahasiswa);
+        if (isset($_GET['nidn'])) {
+            $nidn = $_GET['nidn'];
+            $dosen = mysqli_query($koneksi, "SELECT * FROM tb_dosen WHERE nidn = '$nidn'");
+            $hasil = mysqli_fetch_array($dosen);
         } else {
-            header('Location: ?page=mhsdata'); // Jika tidak sesuai dengan parameter kembali ke halaman tampil data
+            header('Location: ?page=dsndata'); // Jika tidak sesuai dengan parameter kembali ke halaman tampil data
         }
 
         // Jika tombol simpan di klik eksekusi sintaks berikut
         if (isset($_POST['simpan'])) {
             // isi variable menyesuaiakan dengan name="..." yang ada pada form
-            $nama_mahasiswa = $_POST['nama_mahasiswa'];
-            $prodi = $_POST['prodi'];
-            $semester = $_POST['semester'];
+            $nama_dosen = $_POST['nama_dosen'];
+            $pendidikan = $_POST['pendidikan'];
             $alamat = $_POST['alamat'];
             $jenis_kelamin = $_POST['jenis_kelamin'];
             $foto = $_FILES['foto']['name'];
@@ -32,34 +31,32 @@
             // Jika ada foto baru yang diunggah eksekusi sintaks berikut
             if (strlen($foto) > 0) {
                 // Sintaks SQL untuk ubah data jika ada foto baru yang diunggah
-                $sql = "UPDATE tb_mahasiswa SET
-                        nama_mahasiswa = '$nama_mahasiswa',
-                        prodi = '$prodi',
-                        semester = '$semester',
+                $sql = "UPDATE tb_dosen SET
+                        nama_dosen = '$nama_dosen',
+                        pendidikan = '$pendidikan',
                         alamat = '$alamat',
                         jenis_kelamin = '$jenis_kelamin',
                         foto = '$foto'
-                        WHERE nim = '$nim'"; // $nim diambil dari parameter diatas
+                        WHERE nidn = '$nidn'"; // $nidn diambil dari parameter diatas
                 $query = mysqli_query($koneksi, $sql);
 
                 // Pindahkan foto kedalam folder img
                 move_uploaded_file($tmp, 'img/' . $foto);
             } else {
                 // Sintaks SQL untuk ubah data tanpa unggah foto
-                $sql = "UPDATE tb_mahasiswa SET
-                        nama_mahasiswa = '$nama_mahasiswa',
-                        prodi = '$prodi',
-                        semester = '$semester',
+                $sql = "UPDATE tb_dosen SET
+                        nama_dosen = '$nama_dosen',
+                        pendidikan = '$pendidikan',
                         alamat = '$alamat',
                         jenis_kelamin = '$jenis_kelamin'
-                        WHERE nim = '$nim'"; // $nim diambil dari parameter diatas
+                        WHERE nidn = '$nidn'"; // $nidn diambil dari parameter diatas
                 $query = mysqli_query($koneksi, $sql);
             }
 
             // Alerts atau pesan
             if ($query) {
                 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="?page=mhsdata">disini</a>.
+                        <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="?page=dsndata">disini</a>.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
             } else {
@@ -73,64 +70,50 @@
 
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="row mb-3">
-                <label for="nim" class="col-sm-4 col-form-label">Nomor Induk Mahasiswa</label>
+                <label for="nidn" class="col-sm-4 col-form-label">Nomor Induk Dosen Nasional</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nim" name="nim" disabled value="<?php echo $hasil['nim']; ?>">
+                    <input type="text" class="form-control" id="nidn" name="nidn" disabled value="<?php echo $hasil['nidn']; ?>">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="nama_mahasiswa" class="col-sm-4 col-form-label">Nama Mahasiswa</label>
+                <label for="nama_dosen" class="col-sm-4 col-form-label">Nama Dosen</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nama_mahasiswa" name="nama_mahasiswa" value="<?php echo $hasil['nama_mahasiswa']; ?>">
+                    <input type="text" class="form-control" id="nama_dosen" name="nama_dosen" value="<?php echo $hasil['nama_dosen']; ?>">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="prodi" class="col-sm-4 col-form-label">Program Studi</label>
+                <label for="pendidikan" class="col-sm-4 col-form-label">Pendidikan</label>
                 <div class="col-sm-8">
-                    <select class="form-select" id="prodi" name="prodi">
-                        <option value="Teknik Informatika" <?php if ($hasil['prodi'] == "Teknik Informatika") {
+                    <select class="form-select" id="pendidikan" name="pendidikan">
+                        <option value="S1 Teknik Informatika" <?php if ($hasil['pendidikan'] == "S1 Teknik Informatika") {
+                                                                    echo "selected";
+                                                                } ?>>S1 Teknik Informatika</option>
+                        <option value="S2 Teknik Informatika" <?php if ($hasil['pendidikan'] == "S2 Teknik Informatika") {
+                                                                    echo "selected";
+                                                                } ?>>S2 Teknik Informatika</option>
+                        <option value="S3 Teknik Informatika" <?php if ($hasil['pendidikan'] == "S3 Teknik Informatika") {
+                                                                    echo "selected";
+                                                                } ?>>S3 Teknik Informatika</option>
+                        <option value="S1 Sistem Informasi" <?php if ($hasil['pendidikan'] == "S1 Sistem Informasi") {
                                                                 echo "selected";
-                                                            } ?>>Teknik Informatika</option>
-                        <option value="Sistem Informasi" <?php if ($hasil['prodi'] == "Sistem Informasi") {
+                                                            } ?>>S1 Sistem Informasi</option>
+                        <option value="S2 Sistem Informasi" <?php if ($hasil['pendidikan'] == "S2 Sistem Informasi") {
                                                                 echo "selected";
-                                                            } ?>>Sistem Informasi</option>
-                        <option value="Teknologi Informasi" <?php if ($hasil['prodi'] == "Teknologi Informasi") {
+                                                            } ?>>S2 Sistem Informasi</option>
+                        <option value="S3 Sistem Informasi" <?php if ($hasil['pendidikan'] == "S3 Sistem Informasi") {
                                                                 echo "selected";
-                                                            } ?>>Teknologi Informasi</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label for="semester" class="col-sm-4 col-form-label">Semester</label>
-                <div class="col-sm-8">
-                    <select class="form-select" id="semester" name="semester">
-                        <option value="1" <?php if ($hasil['semester'] == "1") {
-                                                echo "selected";
-                                            } ?>>1</option>
-                        <option value="2" <?php if ($hasil['semester'] == "2") {
-                                                echo "selected";
-                                            } ?>>2</option>
-                        <option value="3" <?php if ($hasil['semester'] == "3") {
-                                                echo "selected";
-                                            } ?>>3</option>
-                        <option value="4" <?php if ($hasil['semester'] == "4") {
-                                                echo "selected";
-                                            } ?>>4</option>
-                        <option value="5" <?php if ($hasil['semester'] == "5") {
-                                                echo "selected";
-                                            } ?>>5</option>
-                        <option value="6" <?php if ($hasil['semester'] == "6") {
-                                                echo "selected";
-                                            } ?>>6</option>
-                        <option value="7" <?php if ($hasil['semester'] == "7") {
-                                                echo "selected";
-                                            } ?>>7</option>
-                        <option value="8" <?php if ($hasil['semester'] == "8") {
-                                                echo "selected";
-                                            } ?>>8</option>
+                                                            } ?>>S3 Sistem Informasi</option>
+                        <option value="S1 Tekknologi Informasi" <?php if ($hasil['pendidikan'] == "S1 Tekknologi Informasi") {
+                                                                    echo "selected";
+                                                                } ?>>S1 Tekknologi Informasi</option>
+                        <option value="S2 Tekknologi Informasi" <?php if ($hasil['pendidikan'] == "S2 Tekknologi Informasi") {
+                                                                    echo "selected";
+                                                                } ?>>S2 Tekknologi Informasi</option>
+                        <option value="S3 Tekknologi Informasi" <?php if ($hasil['pendidikan'] == "S3 Tekknologi Informasi") {
+                                                                    echo "selected";
+                                                                } ?>>S3 Tekknologi Informasi</option>
                     </select>
                 </div>
             </div>
@@ -173,7 +156,7 @@
             </div>
 
             <input type="submit" name="simpan" value="SIMPAN" class="btn btn-primary">
-            <a href="?page=mhsdata" class="btn btn-warning">BATAL</a>
+            <a href="?page=dsndata" class="btn btn-warning">BATAL</a>
         </form>
     </div>
 </div>

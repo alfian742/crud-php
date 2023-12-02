@@ -1,10 +1,10 @@
 <!-- Content -->
 <div class="card">
     <div class="card-header text-bg-primary fw-medium">
-        DATA MAHASISWA
+        DATA DOSEN
     </div>
     <div class="card-body">
-        <h5 class="card-title mb-4">Tambah Data Mahasiswa</h5>
+        <h5 class="card-title mb-4">Tambah Data Dosen</h5>
 
         <?php
         include 'koneksi.php'; // Import file koneksi
@@ -12,17 +12,16 @@
         // Jika tombol simpan di klik eksekusi sintaks berikut
         if (isset($_POST['simpan'])) {
             // isi variable menyesuaiakan dengan name="..." yang ada pada form
-            $nim = $_POST['nim'];
-            $nama_mahasiswa = $_POST['nama_mahasiswa'];
-            $prodi = $_POST['prodi'];
-            $semester = $_POST['semester'];
+            $nidn = $_POST['nidn'];
+            $nama_dosen = $_POST['nama_dosen'];
+            $pendidikan = $_POST['pendidikan'];
             $alamat = $_POST['alamat'];
             $jenis_kelamin = $_POST['jenis_kelamin'];
             $foto = $_FILES['foto']['name'];
             $tmp = $_FILES['foto']['tmp_name'];
 
             // Sintaks SQL untuk tambah data
-            $sql = "INSERT INTO tb_mahasiswa VALUES ('$nim', '$nama_mahasiswa', '$prodi', '$semester', '$alamat', '$jenis_kelamin', '$foto')";
+            $sql = "INSERT INTO tb_dosen VALUES ('$nidn', '$nama_dosen', '$pendidikan', '$alamat', '$jenis_kelamin', '$foto')";
             $query = mysqli_query($koneksi, $sql);
 
             // Pindahkan foto kedalam folder img
@@ -31,7 +30,7 @@
             // Alerts atau pesan
             if ($query) {
                 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="?page=mhsdata">disini</a>.
+                        <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="?page=dsndata">disini</a>.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
             } else {
@@ -45,42 +44,32 @@
 
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="row mb-3">
-                <label for="nim" class="col-sm-4 col-form-label">Nomor Induk Mahasiswa</label>
+                <label for="nidn" class="col-sm-4 col-form-label">Nomor Induk Dosen Nasional</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nim" name="nim">
+                    <input type="text" class="form-control" id="nidn" name="nidn">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="nama_mahasiswa" class="col-sm-4 col-form-label">Nama Mahasiswa</label>
+                <label for="nama_dosen" class="col-sm-4 col-form-label">Nama Dosen</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nama_mahasiswa" name="nama_mahasiswa">
+                    <input type="text" class="form-control" id="nama_dosen" name="nama_dosen">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="prodi" class="col-sm-4 col-form-label">Program Studi</label>
+                <label for="pendidikan" class="col-sm-4 col-form-label">Pendidikan</label>
                 <div class="col-sm-8">
-                    <select class="form-select" id="prodi" name="prodi">
-                        <option value="Teknik Informatika">Teknik Informatika</option>
-                        <option value="Sistem Informasi">Sistem Informasi</option>
-                        <option value="Teknologi Informasi">Teknologi Informasi</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label for="semester" class="col-sm-4 col-form-label">Semester</label>
-                <div class="col-sm-8">
-                    <select class="form-select" id="semester" name="semester">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
+                    <select class="form-select" id="pendidikan" name="pendidikan">
+                        <option value="S1 Teknik Informatika">S1 Teknik Informatika</option>
+                        <option value="S2 Teknik Informatika">S2 Teknik Informatika</option>
+                        <option value="S3 Teknik Informatika">S3 Teknik Informatika</option>
+                        <option value="S1 Sistem Informasi">S1 Sistem Informasi</option>
+                        <option value="S2 Sistem Informasi">S2 Sistem Informasi</option>
+                        <option value="S3 Sistem Informasi">S3 Sistem Informasi</option>
+                        <option value="S1 Teknologi Informasi">S1 Teknologi Informasi</option>
+                        <option value="S2 Teknologi Informasi">S2 Teknologi Informasi</option>
+                        <option value="S3 Teknologi Informasi">S3 Teknologi Informasi</option>
                     </select>
                 </div>
             </div>

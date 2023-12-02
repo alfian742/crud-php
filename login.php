@@ -30,7 +30,7 @@ session_start();
                             $password = md5($_POST['password']);
 
                             // Sintaks SQL untuk eksekusi login user
-                            $sql = "select * from tb_user where email='$email' and password='$password'";
+                            $sql = "SELECT * FROM tb_user WHERE email='$email' AND password='$password'";
                             $query = mysqli_query($koneksi, $sql);
                             $data = mysqli_fetch_array($query);
                             $row = mysqli_num_rows($query);
@@ -39,7 +39,7 @@ session_start();
                                 $_SESSION['email'] = $data['email'];
                                 $_SESSION['level'] = $data['level'];
                                 $_SESSION['nama_lengkap'] = $data['nama_lengkap'];
-                                header("Location: beranda.php");
+                                header('Location: beranda.php');
                             } else {
                                 echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                         <strong>Email atau Password salah!</strong> Silahkan coba kembali.

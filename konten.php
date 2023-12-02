@@ -4,7 +4,9 @@ if (isset($_GET['page'])) {
 	if (file_exists("$page.php")) {
 		include "$page.php";
 	} else {
-		echo "<h3>Halaman Tidak Ditemukan</h3>";
+		echo '<div class="alert alert-warning" role="alert">
+                <strong>Halaman tidak ditemukan!</strong>
+            </div>';
 	}
 } else {
 	include "home.php";

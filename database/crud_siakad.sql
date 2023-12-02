@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 18 Nov 2023 pada 04.08
+-- Waktu pembuatan: 02 Des 2023 pada 02.08
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 7.4.29
 
@@ -24,17 +24,44 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_dosen`
+--
+
+CREATE TABLE `tb_dosen` (
+  `nidn` char(10) NOT NULL,
+  `nama_dosen` varchar(255) NOT NULL,
+  `pendidikan` varchar(255) NOT NULL,
+  `alamat` text NOT NULL,
+  `jenis_kelamin` varchar(1) NOT NULL,
+  `foto` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_mahasiswa`
 --
 
 CREATE TABLE `tb_mahasiswa` (
   `nim` char(7) NOT NULL,
-  `nama` varchar(35) DEFAULT NULL,
-  `prodi` text DEFAULT NULL,
+  `nama_mahasiswa` varchar(255) DEFAULT NULL,
+  `prodi` varchar(255) DEFAULT NULL,
   `semester` int(2) DEFAULT NULL,
   `alamat` text DEFAULT NULL,
   `jenis_kelamin` varchar(1) DEFAULT NULL,
-  `foto` varchar(50) DEFAULT NULL
+  `foto` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tb_mk`
+--
+
+CREATE TABLE `tb_mk` (
+  `kode_mk` char(8) NOT NULL,
+  `nama_mk` varchar(255) NOT NULL,
+  `sks` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -55,19 +82,31 @@ CREATE TABLE `tb_user` (
 --
 
 INSERT INTO `tb_user` (`email`, `password`, `level`, `nama_lengkap`) VALUES
-('admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 'Admin'),
-('dosen@gmail.com', 'ce28eed1511f631af6b2a7bb0a85d636', 'Dosen', 'Dosen'),
-('mahasiswa@gmail.com', '5787be38ee03a9ae5360f54d9026465f', 'Mahasiswa', 'Mahasiswa');
+('admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 'Alfian Hidayat'),
+('dosen@gmail.com', 'ce28eed1511f631af6b2a7bb0a85d636', 'Dosen', 'Hidayat'),
+('mahasiswa@gmail.com', '5787be38ee03a9ae5360f54d9026465f', 'Mahasiswa', 'Alfian');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indeks untuk tabel `tb_dosen`
+--
+ALTER TABLE `tb_dosen`
+  ADD PRIMARY KEY (`nidn`);
+
+--
 -- Indeks untuk tabel `tb_mahasiswa`
 --
 ALTER TABLE `tb_mahasiswa`
   ADD PRIMARY KEY (`nim`);
+
+--
+-- Indeks untuk tabel `tb_mk`
+--
+ALTER TABLE `tb_mk`
+  ADD PRIMARY KEY (`kode_mk`);
 
 --
 -- Indeks untuk tabel `tb_user`
