@@ -10,7 +10,7 @@ session_start();
     <title>SIAKAD</title>
 
     <!-- Bootstrap css -->
-    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -76,7 +76,7 @@ session_start();
     </div>
 
     <!-- Script -->
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
