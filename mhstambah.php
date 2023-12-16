@@ -20,41 +20,67 @@
             $jenis_kelamin = $_POST['jenis_kelamin'];
             $foto = $_FILES['foto']['name'];
             $tmp = $_FILES['foto']['tmp_name'];
+            $size = $_FILES['foto']['size'];
+            $ekstensiFoto = strtolower(pathinfo($foto)['extension']);
+            $ekstensi = array('jpg', 'jpeg', 'png');
 
-            // Sintaks SQL untuk tambah data
-            $sql = "INSERT INTO tb_mahasiswa VALUES ('$nim', '$nama_mahasiswa', '$prodi', '$semester', '$alamat', '$jenis_kelamin', '$foto')";
-            $query = mysqli_query($koneksi, $sql);
-
-            // Pindahkan foto kedalam folder img
-            move_uploaded_file($tmp, 'img/' . $foto);
-
-            // Alerts atau pesan
-            if ($query) {
-                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="?page=mhsdata">disini</a>.
+            $cekNIM = mysqli_query($koneksi, "SELECT nim FROM tb_mahasiswa where nim='$nim'");
+            if (mysqli_num_rows($cekNIM) > 0) { // Cek NIM
+                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>NIM sudah ada!</strong> Silahkan coba kembali.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+            } elseif (strlen($nim) <> 7) { // Cek jumlah karakter NIM
+                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>NIM harus 7 karakter!</strong> Silahkan coba kembali..
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+            } elseif (!in_array($ekstensiFoto, $ekstensi)) { // Cek ekstensi foto
+                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Format tidak didukung!</strong> Silahkan unggah foto dengan tipe JPG/JPEG/PNG.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+            } elseif ($size > 1000000) { // Cek ukuran foto
+                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Ukuran foto terlalu besar!</strong> Silahkan unggah foto maksimal 1MB.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
             } else {
-                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Data gagal disimpan!</strong> Silahkan coba kembali.
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>';
+                // Sintaks SQL untuk tambah data
+                $sql = "INSERT INTO tb_mahasiswa VALUES ('$nim', '$nama_mahasiswa', '$prodi', '$semester', '$alamat', '$jenis_kelamin', '$foto')";
+                $query = mysqli_query($koneksi, $sql);
+
+                // Pindahkan foto kedalam folder img
+                move_uploaded_file($tmp, 'img/' . $foto);
+
+                // Alerts atau pesan
+                if ($query) {
+                    echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="?page=mhsdata">disini</a>.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                } else {
+                    echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Data gagal disimpan!</strong> Silahkan coba kembali.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>';
+                }
             }
         }
         ?>
 
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="row mb-3">
-                <label for="nim" class="col-sm-4 col-form-label">Nomor Induk Mahasiswa</label>
+                <label for="nim" class="col-sm-4 col-form-label">Nomor Induk Mahasiswa <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nim" name="nim">
+                    <input type="text" class="form-control" id="nim" name="nim" required>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="nama_mahasiswa" class="col-sm-4 col-form-label">Nama Mahasiswa</label>
+                <label for="nama_mahasiswa" class="col-sm-4 col-form-label">Nama Mahasiswa<strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nama_mahasiswa" name="nama_mahasiswa">
+                    <input type="text" class="form-control" id="nama_mahasiswa" name="nama_mahasiswa" required>
                 </div>
             </div>
 
@@ -111,9 +137,10 @@
             </div>
 
             <div class="row mb-3">
-                <label for="foto" class="col-sm-4 col-form-label">Foto</label>
+                <label for="foto" class="col-sm-4 col-form-label">Foto <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
-                    <input class="form-control" type="file" id="foto" name="foto">
+                    <!-- <input class="form-control" type="file" id="foto" name="foto" accept="image/jpeg, image/jpg, image/png" required> -->
+                    <input class="form-control" type="file" id="foto" name="foto" required>
                 </div>
             </div>
 

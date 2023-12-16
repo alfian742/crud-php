@@ -49,21 +49,21 @@
 
         <form action="" method="POST">
             <div class="row mb-3">
-                <label for="kode_mk" class="col-sm-4 col-form-label">Kode Mata Kuliah</label>
+                <label for="kode_mk" class="col-sm-4 col-form-label">Kode Mata Kuliah <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="kode_mk" name="kode_mk" disabled value="<?php echo $hasil['kode_mk']; ?>">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="nama_mk" class="col-sm-4 col-form-label">Nama Mata Kuliah</label>
+                <label for="nama_mk" class="col-sm-4 col-form-label">Nama Mata Kuliah <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nama_mk" name="nama_mk" value="<?php echo $hasil['nama_mk']; ?>">
+                    <input type="text" class="form-control" id="nama_mk" name="nama_mk" required value="<?php echo $hasil['nama_mk']; ?>">
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="sks" class="col-sm-4 col-form-label">sks</label>
+                <label for="sks" class="col-sm-4 col-form-label">Jumlah SKS</label>
                 <div class="col-sm-8">
                     <select class="form-select" id="sks" name="sks">
                         <option value="1" <?php if ($hasil['sks'] == "1") {
