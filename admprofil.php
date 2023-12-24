@@ -1,3 +1,4 @@
+<!-- Content -->
 <div class="card">
     <div class="card-header text-bg-primary fw-medium">
         PROFIL
@@ -14,7 +15,7 @@
             $email = $_SESSION['email'];
 
             $profil = mysqli_query($koneksi, "SELECT * FROM tb_user WHERE email='$email'");
-            $result = mysqli_fetch_array($profil);
+            $hasil = mysqli_fetch_array($profil);
         } else {
             header('Location: beranda.php');
         }
@@ -25,7 +26,7 @@
             if (!empty($_POST['password'])) {
                 $password = md5($_POST['password']);
             } else {
-                $password = $result['password'];
+                $password = $hasil['password'];
             }
 
             $sql = "UPDATE tb_user SET
@@ -36,7 +37,7 @@
 
             if ($query) {
                 echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong>Profil berhasil diubah.</strong>
+                        <strong>Profil berhasil diubah.</strong> Kembali ke <a href="beranda.php">Beranda</a>.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
             } else {
@@ -50,16 +51,16 @@
 
         <form action="" method="POST">
             <div class="row mb-3">
-                <label for="email" class="col-sm-4 col-form-label">Email</label>
+                <label for="email" class="col-sm-4 col-form-label">Email <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $result['email']; ?>" disabled required>
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $hasil['email']; ?>" disabled required>
                 </div>
             </div>
 
             <div class="row mb-3">
-                <label for="nama_lengkap" class="col-sm-4 col-form-label">Nama</label>
+                <label for="nama_lengkap" class="col-sm-4 col-form-label">Nama <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="<?php echo $result['nama_lengkap']; ?>" placeholder="Masukan Nama" autofocus required>
+                    <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="<?php echo $hasil['nama_lengkap']; ?>" placeholder="Masukan Nama" autofocus required>
                 </div>
             </div>
 
@@ -75,3 +76,4 @@
         </form>
     </div>
 </div>
+<!-- End of content -->

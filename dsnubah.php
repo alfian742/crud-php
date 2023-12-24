@@ -22,6 +22,7 @@
         if (isset($_POST['simpan'])) {
             // isi variable menyesuaiakan dengan name="..." yang ada pada form
             $nama_dosen = $_POST['nama_dosen'];
+            $email = $_POST['email'];
             $pendidikan = $_POST['pendidikan'];
             $alamat = $_POST['alamat'];
             $jenis_kelamin = $_POST['jenis_kelamin'];
@@ -31,10 +32,9 @@
 
             // Jika ada foto baru yang diunggah eksekusi sintaks berikut
             if (strlen($foto) > 0) {
-                $ekstensiFoto = strtolower(pathinfo($foto)['extension']);
-                $ekstensi = array('jpg', 'jpeg', 'png');
+                $ekstensiFoto = pathinfo($foto, PATHINFO_EXTENSION);
 
-                if (!in_array($ekstensiFoto, $ekstensi)) { // Cek ekstensi foto
+                if (!in_array($ekstensiFoto, ['jpg', 'jpeg', 'png'])) { // Cek ekstensi foto
                     echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <strong>Format tidak didukung!</strong> Silahkan unggah foto tipe JPG/JPEG/PNG.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -47,16 +47,24 @@
                 } else {
                     // Sintaks SQL untuk ubah data jika ada foto baru yang diunggah
                     $sql = "UPDATE tb_dosen SET
-                        nama_dosen = '$nama_dosen',
-                        pendidikan = '$pendidikan',
-                        alamat = '$alamat',
-                        jenis_kelamin = '$jenis_kelamin',
-                        foto = '$foto'
-                        WHERE nidn = '$nidn'"; // $nidn diambil dari parameter diatas
+                            nama_dosen = '$nama_dosen',
+                            email = '$email',
+                            pendidikan = '$pendidikan',
+                            alamat = '$alamat',
+                            jenis_kelamin = '$jenis_kelamin',
+                            foto = '$foto'
+                            WHERE nidn = '$nidn'"; // $nidn diambil dari parameter diatas
                     $query = mysqli_query($koneksi, $sql);
 
                     // Pindahkan foto kedalam folder img
                     move_uploaded_file($tmp, 'img/' . $foto);
+
+                    // Update data tb_user
+                    $oldEmail = $hasil['email'];
+                    $user = mysqli_query($koneksi, "UPDATE tb_user SET
+                                                    email='$email',
+                                                    nama_lengkap='$nama_dosen'
+                                                    WHERE email='$oldEmail'");
 
                     // Alerts atau pesan
                     if ($query) {
@@ -75,11 +83,19 @@
                 // Sintaks SQL untuk ubah data tanpa unggah foto
                 $sql = "UPDATE tb_dosen SET
                         nama_dosen = '$nama_dosen',
+                        email = '$email',
                         pendidikan = '$pendidikan',
                         alamat = '$alamat',
                         jenis_kelamin = '$jenis_kelamin'
                         WHERE nidn = '$nidn'"; // $nidn diambil dari parameter diatas
                 $query = mysqli_query($koneksi, $sql);
+
+                // Update data tb_user
+                $oldEmail = $hasil['email'];
+                $user = mysqli_query($koneksi, "UPDATE tb_user SET
+                                                email='$email',
+                                                nama_lengkap='$nama_dosen'
+                                                WHERE email='$oldEmail'");
 
                 // Alerts atau pesan
                 if ($query) {
@@ -101,7 +117,7 @@
             <div class="row mb-3">
                 <label for="nidn" class="col-sm-4 col-form-label">Nomor Induk Dosen Nasional <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nidn" name="nidn" disabled value="<?php echo $hasil['nidn']; ?>">
+                    <input type="text" class="form-control" id="nidn" name="nidn" disabled required value="<?php echo $hasil['nidn']; ?>">
                 </div>
             </div>
 
@@ -109,6 +125,13 @@
                 <label for="nama_dosen" class="col-sm-4 col-form-label">Nama Dosen <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="nama_dosen" name="nama_dosen" required value="<?php echo $hasil['nama_dosen']; ?>">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="email" class="col-sm-4 col-form-label">Email <strong class="text-danger">*</strong></label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" id="email" name="email" required value="<?php echo $hasil['email']; ?>">
                 </div>
             </div>
 

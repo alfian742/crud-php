@@ -14,16 +14,19 @@
             // isi variable menyesuaiakan dengan name="..." yang ada pada form
             $nidn = $_POST['nidn'];
             $nama_dosen = $_POST['nama_dosen'];
+            $email = $_POST['email'];
+            $password = md5('321');
             $pendidikan = $_POST['pendidikan'];
             $alamat = $_POST['alamat'];
             $jenis_kelamin = $_POST['jenis_kelamin'];
             $foto = $_FILES['foto']['name'];
             $tmp = $_FILES['foto']['tmp_name'];
             $size = $_FILES['foto']['size'];
-            $ekstensiFoto = strtolower(pathinfo($foto)['extension']);
-            $ekstensi = array('jpg', 'jpeg', 'png');
+            $ekstensiFoto = pathinfo($foto, PATHINFO_EXTENSION);
 
             $cekNIDN = mysqli_query($koneksi, "SELECT nidn FROM tb_dosen where nidn='$nidn'");
+            $cekEmail = mysqli_query($koneksi, "SELECT email FROM tb_dosen where email='$email'");
+
             if (mysqli_num_rows($cekNIDN) > 0) { // Cek NIDN
                 echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>NIDN sudah ada!</strong> Silahkan coba kembali.
@@ -31,10 +34,15 @@
                     </div>';
             } elseif (strlen($nidn) <> 10) { // Cek jumlah karakter NIDN
                 echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>NIDN harus 10 karakter!</strong> Silahkan coba kembali..
+                        <strong>NIDN harus 10 karakter!</strong> Silahkan coba kembali.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
-            } elseif (!in_array($ekstensiFoto, $ekstensi)) { // Cek ekstensi foto
+            } elseif (mysqli_num_rows($cekEmail) > 0) { // Cek NIDN
+                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Email sudah ada!</strong> Silahkan coba kembali.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+            } elseif (!in_array($ekstensiFoto, ['jpg', 'jpeg', 'png'])) { // Cek ekstensi foto
                 echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>Format tidak didukung!</strong> Silahkan unggah foto dengan tipe JPG/JPEG/PNG.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -46,7 +54,7 @@
                     </div>';
             } else {
                 // Sintaks SQL untuk tambah data
-                $sql = "INSERT INTO tb_dosen VALUES ('$nidn', '$nama_dosen', '$pendidikan', '$alamat', '$jenis_kelamin', '$foto')";
+                $sql = "INSERT INTO tb_dosen VALUES ('$nidn', '$nama_dosen', '$email', '$pendidikan', '$alamat', '$jenis_kelamin', '$foto')";
                 $query = mysqli_query($koneksi, $sql);
 
                 // Pindahkan foto kedalam folder img
@@ -64,6 +72,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
                 }
+
+                $user = mysqli_query($koneksi, "INSERT INTO tb_user VALUES ('$email', '$password', 'Dosen', '$nama_dosen')");
             }
         }
         ?>
@@ -80,6 +90,13 @@
                 <label for="nama_dosen" class="col-sm-4 col-form-label">Nama Dosen <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="nama_dosen" name="nama_dosen" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="email" class="col-sm-4 col-form-label">Email <strong class="text-danger">*</strong></label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" id="email" name="email" required>
                 </div>
             </div>
 

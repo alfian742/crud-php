@@ -23,11 +23,13 @@
             // isi variable menyesuaiakan dengan name="..." yang ada pada form
             $nama_mk = $_POST['nama_mk'];
             $sks = $_POST['sks'];
+            $semester = $_POST['semester'];
 
             // Sintaks SQL untuk ubah data
             $sql = "UPDATE tb_mk SET
                     nama_mk = '$nama_mk',
-                    sks = '$sks'
+                    sks = '$sks',
+                    semester = '$semester'
                     WHERE kode_mk = '$kode_mk'"; // $kode_mk diambil dari parameter diatas
 
             $query = mysqli_query($koneksi, $sql);
@@ -93,6 +95,20 @@
                         <option value="9" <?php if ($hasil['sks'] == "9") {
                                                 echo "selected";
                                             } ?>>9</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="sks" class="col-sm-4 col-form-label">Jumlah SKS</label>
+                <div class="col-sm-8">
+                    <select class="form-select" id="sks" name="sks">
+                        <option value="Ganjil" <?php if ($hasil['sks'] == "Ganjil") {
+                                                    echo "selected";
+                                                } ?>>Ganjil</option>
+                        <option value="Genap" <?php if ($hasil['sks'] == "Genap") {
+                                                    echo "selected";
+                                                } ?>>Genap</option>
                     </select>
                 </div>
             </div>

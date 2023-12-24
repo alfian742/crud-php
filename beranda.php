@@ -53,15 +53,13 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                     <div class="list-group">
                         <a href="beranda.php" class="list-group-item list-group-item-action active">Beranda</a>
                         <?php if ($_SESSION['level'] == "Mahasiswa") { ?>
-                            <a href="?page=prfubah" class="list-group-item list-group-item-action">Update Profile</a>
                             <a href="#" class="list-group-item list-group-item-action">Isi KRS</a>
                             <a href="#" class="list-group-item list-group-item-action">Lihat KHS</a>
                         <?php } elseif ($_SESSION['level'] == "Dosen") { ?>
-                            <a href="?page=prfubah" class="list-group-item list-group-item-action">Ubah Profil</a>
                             <a href="#" class="list-group-item list-group-item-action">Cek KRS</a>
                             <a href="#" class="list-group-item list-group-item-action">Input Nilai</a>
                         <?php } elseif ($_SESSION['level'] == "Admin") { ?>
-                            <a href="?page=prfubah" class="list-group-item list-group-item-action">Ubah Profil</a>
+                            <a href="?page=admprofil" class="list-group-item list-group-item-action">Ubah Profil</a>
                             <a href="?page=mhsdata" class="list-group-item list-group-item-action">Data Mahasiswa</a>
                             <a href="?page=dsndata" class="list-group-item list-group-item-action">Data Dosen</a>
                             <a href="?page=mkdata" class="list-group-item list-group-item-action">Data Mata Kuliah</a>

@@ -15,6 +15,7 @@
             $kode_mk = $_POST['kode_mk'];
             $nama_mk = $_POST['nama_mk'];
             $sks = $_POST['sks'];
+            $semester = $_POST['semester'];
 
             $cekKodeMK = mysqli_query($koneksi, "SELECT kode_mk FROM tb_mk where kode_mk='$kode_mk'");
             if (mysqli_num_rows($cekKodeMK) > 0) { // Cek Kode MK
@@ -22,14 +23,14 @@
                         <strong>Kode Mata Kuliah sudah ada!</strong> Silahkan coba kembali.
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
-            } elseif (strlen($kode_mk) <> 8) { // Cek jumlah karakter Kode MK
+            } elseif (strlen($kode_mk) <> 5) { // Cek jumlah karakter Kode MK
                 echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Kode Mata Kuliah harus 8 karakter!</strong> Silahkan coba kembali..
+                        <strong>Kode Mata Kuliah harus 5 karakter!</strong> Silahkan coba kembali..
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>';
             } else {
                 // Sintaks SQL untuk tambah data
-                $sql = "INSERT INTO tb_mk VALUES ('$kode_mk', '$nama_mk', '$sks')";
+                $sql = "INSERT INTO tb_mk VALUES ('$kode_mk', '$nama_mk', '$sks', '$semester')";
                 $query = mysqli_query($koneksi, $sql);
 
                 // Alerts atau pesan
@@ -48,7 +49,7 @@
         }
         ?>
 
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="" method="POST">
             <div class="row mb-3">
                 <label for="kode_mk" class="col-sm-4 col-form-label">Kode Mata Kuliah <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
@@ -76,6 +77,16 @@
                         <option value="7">7</option>
                         <option value="8">8</option>
                         <option value="9">9</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="semester" class="col-sm-4 col-form-label">Semester</label>
+                <div class="col-sm-8">
+                    <select class="form-select" id="semester" name="semester">
+                        <option value="Ganjil">Ganjil</option>
+                        <option value="Genap">Genap</option>
                     </select>
                 </div>
             </div>

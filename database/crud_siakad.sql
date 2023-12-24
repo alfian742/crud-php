@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 16 Des 2023 pada 03.35
+-- Waktu pembuatan: 24 Des 2023 pada 03.47
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -29,12 +29,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tb_dosen` (
   `nidn` char(10) NOT NULL,
-  `nama_dosen` varchar(255) NOT NULL,
-  `pendidikan` varchar(255) NOT NULL,
-  `alamat` text NOT NULL,
-  `jenis_kelamin` varchar(1) NOT NULL,
-  `foto` varchar(255) NOT NULL
+  `nama_dosen` varchar(255) DEFAULT NULL,
+  `email` char(255) NOT NULL,
+  `pendidikan` varchar(255) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
+  `jenis_kelamin` varchar(1) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tb_dosen`
+--
+
+INSERT INTO `tb_dosen` (`nidn`, `nama_dosen`, `email`, `pendidikan`, `alamat`, `jenis_kelamin`, `foto`) VALUES
+('1234567890', 'Michael', 'dosen@gmail.com', 'S3 Sistem Informasi', 'Mataram', 'L', 'foto4.jpg');
 
 -- --------------------------------------------------------
 
@@ -45,12 +53,20 @@ CREATE TABLE `tb_dosen` (
 CREATE TABLE `tb_mahasiswa` (
   `nim` char(7) NOT NULL,
   `nama_mahasiswa` varchar(255) DEFAULT NULL,
+  `email` char(255) NOT NULL,
   `prodi` varchar(255) DEFAULT NULL,
   `semester` int(2) DEFAULT NULL,
   `alamat` text DEFAULT NULL,
   `jenis_kelamin` varchar(1) DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tb_mahasiswa`
+--
+
+INSERT INTO `tb_mahasiswa` (`nim`, `nama_mahasiswa`, `email`, `prodi`, `semester`, `alamat`, `jenis_kelamin`, `foto`) VALUES
+('20TI001', 'William', 'mahasiswa@gmail.com', 'Teknik Informatika', 7, 'Mataram', 'L', 'foto3.jpg');
 
 -- --------------------------------------------------------
 
@@ -59,10 +75,18 @@ CREATE TABLE `tb_mahasiswa` (
 --
 
 CREATE TABLE `tb_mk` (
-  `kode_mk` char(8) NOT NULL,
-  `nama_mk` varchar(255) NOT NULL,
-  `sks` int(1) NOT NULL
+  `kode_mk` char(5) NOT NULL,
+  `nama_mk` varchar(255) DEFAULT NULL,
+  `sks` int(1) DEFAULT NULL,
+  `semester` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tb_mk`
+--
+
+INSERT INTO `tb_mk` (`kode_mk`, `nama_mk`, `sks`, `semester`) VALUES
+('10001', 'Aplikasi Web dan Perangkat Bergerak', 3, 'Ganjil');
 
 -- --------------------------------------------------------
 
@@ -83,8 +107,8 @@ CREATE TABLE `tb_user` (
 
 INSERT INTO `tb_user` (`email`, `password`, `level`, `nama_lengkap`) VALUES
 ('admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 'Alfian Hidayat'),
-('dosen@gmail.com', 'ce28eed1511f631af6b2a7bb0a85d636', 'Dosen', 'Hidayat'),
-('mahasiswa@gmail.com', '5787be38ee03a9ae5360f54d9026465f', 'Mahasiswa', 'Alfian');
+('dosen@gmail.com', 'caf1a3dfb505ffed0d024130f58c5cfa', 'Dosen', 'Michael'),
+('mahasiswa@gmail.com', '202cb962ac59075b964b07152d234b70', 'Mahasiswa', 'William');
 
 --
 -- Indexes for dumped tables

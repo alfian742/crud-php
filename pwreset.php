@@ -1,0 +1,76 @@
+<!-- Content -->
+<div class="card">
+    <div class="card-header text-bg-primary fw-medium">
+        PASSWORD
+    </div>
+    <div class="card-body">
+        <div class="d-flex gap-2 alig-items-center mb-4">
+            <h5 class="card-title my-auto">Reset Password</h5>
+        </div>
+
+        <?php
+        include 'koneksi.php';
+
+        if (isset($_GET['email'])) {
+            $email = $_GET['email'];
+
+            $profil = mysqli_query($koneksi, "SELECT * FROM tb_user WHERE email='$email'");
+            $hasil = mysqli_fetch_array($profil);
+        } else {
+            header('Location: beranda.php');
+        }
+
+        if (isset($_POST['simpan'])) {
+            if (!empty($_POST['password'])) {
+                $password = md5($_POST['password']);
+            } else {
+                $password = $hasil['password'];
+            }
+
+            $sql = "UPDATE tb_user SET
+                    password='$password'
+                    WHERE email='$email'";
+            $query = mysqli_query($koneksi, $sql);
+
+            if ($query) {
+                echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Password berhasil di reset.</strong> Kembali ke <a href="beranda.php">Beranda</a>.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+            } else {
+                echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Password gagal di reset.</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>';
+            }
+        }
+        ?>
+
+        <form action="" method="POST">
+            <div class="row mb-3">
+                <label for="email" class="col-sm-4 col-form-label">Email <strong class="text-danger">*</strong></label>
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $hasil['email']; ?>" disabled required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="nama_lengkap" class="col-sm-4 col-form-label">Nama <strong class="text-danger">*</strong></label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" value="<?php echo $hasil['nama_lengkap']; ?>" disabled required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="password" class="col-sm-4 col-form-label">Password</label>
+                <div class="col-sm-8">
+                    <input type="password" class="form-control" id="password" name="password" value="" placeholder="Masukkan Password Baru" autofocus required>
+                </div>
+            </div>
+
+            <input type="submit" name="simpan" value="SIMPAN" class="btn btn-primary">
+            <a href="beranda.php" class="btn btn-warning">BATAL</a>
+        </form>
+    </div>
+</div>
+<!-- End of content -->

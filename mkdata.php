@@ -14,6 +14,7 @@
                         <th>Kode MK</th>
                         <th>Nama Mata Kuliah</th>
                         <th>SKS</th>
+                        <th>Semester</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -31,8 +32,8 @@
                             <td><?php echo $hasil['kode_mk']; ?></td>
                             <td><?php echo $hasil['nama_mk']; ?></td>
                             <td><?php echo $hasil['sks']; ?></td>
+                            <td><?php echo $hasil['semester']; ?></td>
                             <td>
-                                <!-- Mengubah dan menghapus data berdasarkan parameter -->
                                 <a href="?page=mkubah&&kode_mk=<?php echo $hasil['kode_mk']; ?>" class="btn btn-link">Ubah</a> |
                                 <a href="?page=mkhapus&&kode_mk=<?php echo $hasil['kode_mk']; ?>" onclick="return confirm('Data akan dihapus?')" class="btn btn-link">Hapus</a>
                             </td>

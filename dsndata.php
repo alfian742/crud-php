@@ -39,9 +39,11 @@
                             <td><?php echo $hasil['pendidikan']; ?></td>
                             <td><?php echo $hasil['jenis_kelamin']; ?></td>
                             <td>
-                                <!-- Mengubah dan menghapus data berdasarkan parameter -->
-                                <a href="?page=dsnubah&&nidn=<?php echo $hasil['nidn']; ?>" class="btn btn-link">Ubah</a> |
-                                <a href="?page=dsnhapus&&nidn=<?php echo $hasil['nidn']; ?>" onclick="return confirm('Data akan dihapus?')" class="btn btn-link">Hapus</a>
+                                <div class="d-flex gap-1 align-items-center">
+                                    <a href="?page=dsnubah&&nidn=<?php echo $hasil['nidn']; ?>" class="btn btn-link">Ubah</a> |
+                                    <a href="?page=dsnhapus&&nidn=<?php echo $hasil['nidn']; ?>" onclick="return confirm('Data akan dihapus?')" class="btn btn-link">Hapus</a> |
+                                    <a href="?page=pwreset&&email=<?php echo $hasil['email']; ?>" class="btn btn-link">Reset Password</a>
+                                </div>
                             </td>
                         </tr>
                     <?php }; ?>

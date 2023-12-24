@@ -1,10 +1,10 @@
 <!-- Content -->
 <div class="card">
     <div class="card-header text-bg-primary fw-medium">
-        DATA MAHASISWA
+        PROFIL
     </div>
     <div class="card-body">
-        <h5 class="card-title mb-4">Ubah Data Mahasiswa</h5>
+        <h5 class="card-title mb-4">Ubah Profil</h5>
 
         <?php
         include 'koneksi.php'; // Import file koneksi
@@ -15,14 +15,13 @@
             $mahasiswa = mysqli_query($koneksi, "SELECT * FROM tb_mahasiswa WHERE nim = '$nim'");
             $hasil = mysqli_fetch_array($mahasiswa);
         } else {
-            header('Location: ?page=mhsdata'); // Jika tidak sesuai dengan parameter kembali ke halaman tampil data
+            header('Location: beranda.php'); // Jika tidak sesuai dengan parameter kembali ke halaman beranda
         }
 
         // Jika tombol simpan di klik eksekusi sintaks berikut
         if (isset($_POST['simpan'])) {
             // isi variable menyesuaiakan dengan name="..." yang ada pada form
             $nama_mahasiswa = $_POST['nama_mahasiswa'];
-            $email = $_POST['email'];
             $prodi = $_POST['prodi'];
             $semester = $_POST['semester'];
             $alamat = $_POST['alamat'];
@@ -49,7 +48,6 @@
                     // Sintaks SQL untuk ubah data jika ada foto baru yang diunggah
                     $sql = "UPDATE tb_mahasiswa SET
                             nama_mahasiswa = '$nama_mahasiswa',
-                            email = '$email',
                             prodi = '$prodi',
                             semester = '$semester',
                             alamat = '$alamat',
@@ -64,14 +62,13 @@
                     // Update data tb_user
                     $oldEmail = $hasil['email'];
                     $user = mysqli_query($koneksi, "UPDATE tb_user SET
-                                                    email='$email',  
                                                     nama_lengkap='$nama_mahasiswa'
                                                     WHERE email='$oldEmail'");
 
                     // Alerts atau pesan
                     if ($query) {
                         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="?page=mhsdata">disini</a>.
+                                <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="beranda.php">disini</a>.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>';
                     } else {
@@ -85,7 +82,6 @@
                 // Sintaks SQL untuk ubah data tanpa unggah foto
                 $sql = "UPDATE tb_mahasiswa SET
                         nama_mahasiswa = '$nama_mahasiswa',
-                        email = '$email',
                         prodi = '$prodi',
                         semester = '$semester',
                         alamat = '$alamat',
@@ -96,14 +92,13 @@
                 // Update data tb_user
                 $oldEmail = $hasil['email'];
                 $user = mysqli_query($koneksi, "UPDATE tb_user SET
-                                                email='$email',  
                                                 nama_lengkap='$nama_mahasiswa'
                                                 WHERE email='$oldEmail'");
 
                 // Alerts atau pesan
                 if ($query) {
                     echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="?page=mhsdata">disini</a>.
+                            <strong>Data berhasil disimpan!</strong> Untuk melihat data silahkan klik <a href="beranda.php">disini</a>.
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>';
                 } else {
@@ -120,7 +115,7 @@
             <div class="row mb-3">
                 <label for="nim" class="col-sm-4 col-form-label">Nomor Induk Mahasiswa <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="nim" name="nim" disabled value="<?php echo $hasil['nim']; ?>">
+                    <input type="text" class="form-control" id="nim" name="nim" disabled required value="<?php echo $hasil['nim']; ?>">
                 </div>
             </div>
 
@@ -134,7 +129,7 @@
             <div class="row mb-3">
                 <label for="email" class="col-sm-4 col-form-label">Email <strong class="text-danger">*</strong></label>
                 <div class="col-sm-8">
-                    <input type="email" class="form-control" id="email" name="email" required value="<?php echo $hasil['email']; ?>">
+                    <input type="email" class="form-control" id="email" name="email" disabled required value="<?php echo $hasil['email']; ?>">
                 </div>
             </div>
 
@@ -225,7 +220,7 @@
             </div>
 
             <input type="submit" name="simpan" value="SIMPAN" class="btn btn-primary">
-            <a href="?page=mhsdata" class="btn btn-warning">BATAL</a>
+            <a href="beranda.php" class="btn btn-warning">BATAL</a>
         </form>
     </div>
 </div>

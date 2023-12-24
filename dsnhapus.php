@@ -5,7 +5,14 @@ include 'koneksi.php'; // Import file koneksi
 if (isset($_GET['nidn'])) {
     $nidn = $_GET['nidn'];
 
-    // Sintaks SQL untuk hapus data
+    $dosen = mysqli_query($koneksi, "SELECT * FROM tb_dosen WHERE nidn='$nidn'");
+    $hasil = mysqli_fetch_array($dosen);
+    $email = $hasil['email'];
+
+    // Sintaks SQL untuk hapus data tb_user
+    $user = mysqli_query($koneksi, "DELETE FROM tb_user WHERE email='$email'");
+
+    // Sintaks SQL untuk hapus data tb_dosen
     $sql = "DELETE FROM tb_dosen WHERE nidn = '$nidn'";
     $query = mysqli_query($koneksi, $sql);
 
