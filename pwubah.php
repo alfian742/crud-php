@@ -64,7 +64,7 @@
             <div class="row mb-3">
                 <label for="password" class="col-sm-4 col-form-label">Password</label>
                 <div class="col-sm-8">
-                    <input type="password" class="form-control" id="password" name="password" value="" placeholder="Masukkan Password Baru" autofocus>
+                    <input type="password" class="form-control" id="password" name="password" value="" placeholder="Masukkan Password Baru" autofocus required>
                 </div>
             </div>
 
