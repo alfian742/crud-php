@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Des 2023 pada 03.47
+-- Waktu pembuatan: 29 Des 2023 pada 02.48
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -47,6 +47,29 @@ INSERT INTO `tb_dosen` (`nidn`, `nama_dosen`, `email`, `pendidikan`, `alamat`, `
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_khs`
+--
+
+CREATE TABLE `tb_khs` (
+  `id` int(11) NOT NULL,
+  `nim` char(7) NOT NULL,
+  `kode_mk` char(5) NOT NULL,
+  `semester` int(2) NOT NULL,
+  `nilai` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tb_khs`
+--
+
+INSERT INTO `tb_khs` (`id`, `nim`, `kode_mk`, `semester`, `nilai`) VALUES
+(1, '20TI001', '10001', 7, ''),
+(2, '20TI001', '10002', 7, ''),
+(3, '20TI001', '10003', 7, '');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_mahasiswa`
 --
 
@@ -86,7 +109,9 @@ CREATE TABLE `tb_mk` (
 --
 
 INSERT INTO `tb_mk` (`kode_mk`, `nama_mk`, `sks`, `semester`) VALUES
-('10001', 'Aplikasi Web dan Perangkat Bergerak', 3, 'Ganjil');
+('10001', 'Aplikasi Web dan Perangkat Bergerak', 3, 'Ganjil'),
+('10002', 'Desain Web Interaktif', 3, 'Ganjil'),
+('10003', 'Sistem Forensik Digital', 3, 'Ganjil');
 
 -- --------------------------------------------------------
 
@@ -121,6 +146,12 @@ ALTER TABLE `tb_dosen`
   ADD PRIMARY KEY (`nidn`);
 
 --
+-- Indeks untuk tabel `tb_khs`
+--
+ALTER TABLE `tb_khs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `tb_mahasiswa`
 --
 ALTER TABLE `tb_mahasiswa`
@@ -137,6 +168,16 @@ ALTER TABLE `tb_mk`
 --
 ALTER TABLE `tb_user`
   ADD PRIMARY KEY (`email`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_khs`
+--
+ALTER TABLE `tb_khs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

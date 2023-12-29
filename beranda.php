@@ -19,7 +19,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
             <!-- Navbar -->
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded-bottom-2 mb-4">
                 <div class="container-fluid">
-                    <a class="navbar-brand fw-medium" href="index.php">SIAKAD</a>
+                    <a class="navbar-brand fw-medium" href="beranda.php">SIAKAD</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -53,7 +53,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                     <div class="list-group">
                         <a href="beranda.php" class="list-group-item list-group-item-action active">Beranda</a>
                         <?php if ($_SESSION['level'] == "Mahasiswa") { ?>
-                            <a href="#" class="list-group-item list-group-item-action">Isi KRS</a>
+                            <a href="?page=krsisi" class="list-group-item list-group-item-action">Isi KRS</a>
                             <a href="#" class="list-group-item list-group-item-action">Lihat KHS</a>
                         <?php } elseif ($_SESSION['level'] == "Dosen") { ?>
                             <a href="#" class="list-group-item list-group-item-action">Cek KRS</a>

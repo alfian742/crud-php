@@ -62,7 +62,7 @@
 
              <div class="d-flex gap-2">
                  <a href="?page=mhsprofil&&nim=<?php echo $hasilMahasiswa['nim'] ?>" class="btn btn-primary">Ubah Profil</a>
-                 <a href="?page=pwresets" class="btn btn-primary">Ubah Password</a>
+                 <a href="?page=pwubah" class="btn btn-primary">Ubah Password</a>
              </div>
          <?php } elseif ($_SESSION['level'] == "Dosen") {
                 $sqlDosen = mysqli_query($koneksi, "SELECT * FROM tb_dosen WHERE email='$_SESSION[email]'");
@@ -112,7 +112,7 @@
 
              <div class="d-flex gap-2">
                  <a href="?page=dsnprofil&&nidn=<?php echo $hasilDosen['nidn'] ?>" class="btn btn-primary">Ubah Profil</a>
-                 <a href="?page=pwresets" class="btn btn-primary">Ubah Password</a>
+                 <a href="?page=pwubah" class="btn btn-primary">Ubah Password</a>
              </div>
          <?php } elseif ($_SESSION['level'] == "Admin") { ?>
              <p class="card-text mb-4">Selamat datang di Sistem Informasi Akademik Universitas Teknologi Mataram. Kelola informasi penting terkait akademik dengan memilih salah satu opsi di bawah ini:</p>
