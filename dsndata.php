@@ -39,8 +39,8 @@
                             <td><?php echo $hasil['pendidikan']; ?></td>
                             <td><?php echo $hasil['jenis_kelamin']; ?></td>
                             <td>
-                                <a href="?page=dsnubah&&nidn=<?php echo $hasil['nidn']; ?>" class="btn btn-link">Ubah</a> |
-                                <a href="?page=dsnhapus&&nidn=<?php echo $hasil['nidn']; ?>" onclick="return confirm('Data akan dihapus?')" class="btn btn-link">Hapus</a>
+                                <a href="?page=dsnubah&&nidn=<?php echo $hasil['nidn']; ?>" class="btn btn-sm btn-primary">Ubah</a>
+                                <a href="?page=dsnhapus&&nidn=<?php echo $hasil['nidn']; ?>" onclick="return confirm('Data akan dihapus?')" class="btn btn-sm btn-warning">Hapus</a>
                             </td>
                         </tr>
                     <?php }; ?>

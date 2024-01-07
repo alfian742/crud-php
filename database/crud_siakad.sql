@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 29 Des 2023 pada 02.48
+-- Waktu pembuatan: 07 Jan 2024 pada 10.05
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -63,9 +63,13 @@ CREATE TABLE `tb_khs` (
 --
 
 INSERT INTO `tb_khs` (`id`, `nim`, `kode_mk`, `semester`, `nilai`) VALUES
-(1, '20TI001', '10001', 7, ''),
-(2, '20TI001', '10002', 7, ''),
-(3, '20TI001', '10003', 7, '');
+(1, '20TI001', '10008', 7, ''),
+(2, '20TI001', '10009', 7, ''),
+(3, '20TI001', '10010', 7, ''),
+(4, '20TI001', '10011', 7, ''),
+(5, '20TI001', '10012', 7, ''),
+(6, '20TI001', '10013', 7, ''),
+(7, '20TI001', '10014', 7, '');
 
 -- --------------------------------------------------------
 
@@ -109,9 +113,20 @@ CREATE TABLE `tb_mk` (
 --
 
 INSERT INTO `tb_mk` (`kode_mk`, `nama_mk`, `sks`, `semester`) VALUES
-('10001', 'Aplikasi Web dan Perangkat Bergerak', 3, 'Ganjil'),
-('10002', 'Desain Web Interaktif', 3, 'Ganjil'),
-('10003', 'Sistem Forensik Digital', 3, 'Ganjil');
+('10001', 'Simulasi dan Pemodelan', 2, 'Genap'),
+('10002', 'Memimpin Pemrograman Komputer', 2, 'Genap'),
+('10003', 'Statistika dan Probabilitas', 3, 'Genap'),
+('10004', 'Riset Teknologi Informasi', 3, 'Genap'),
+('10005', 'Hukum dan Etika Profesi TI', 3, 'Genap'),
+('10006', 'Kerangka Kerja Web', 3, 'Genap'),
+('10007', 'Pengembangan Komputasi Awan', 3, 'Genap'),
+('10008', 'Sistem Forensik Digital', 3, 'Ganjil'),
+('10009', 'Komputasi Paralel dan Terdistribusi', 3, 'Ganjil'),
+('10010', 'Aplikasi Web dan Perangkat Bergerak', 3, 'Ganjil'),
+('10011', 'Desain Web Interaktif', 3, 'Ganjil'),
+('10012', 'Kreatif Digital', 3, 'Ganjil'),
+('10013', 'Keamanan Informasi', 3, 'Ganjil'),
+('10014', 'E-Commerce', 2, 'Ganjil');
 
 -- --------------------------------------------------------
 
@@ -177,7 +192,7 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT untuk tabel `tb_khs`
 --
 ALTER TABLE `tb_khs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

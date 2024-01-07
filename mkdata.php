@@ -34,8 +34,8 @@
                             <td><?php echo $hasil['sks']; ?></td>
                             <td><?php echo $hasil['semester']; ?></td>
                             <td>
-                                <a href="?page=mkubah&&kode_mk=<?php echo $hasil['kode_mk']; ?>" class="btn btn-link">Ubah</a> |
-                                <a href="?page=mkhapus&&kode_mk=<?php echo $hasil['kode_mk']; ?>" onclick="return confirm('Data akan dihapus?')" class="btn btn-link">Hapus</a>
+                                <a href="?page=mkubah&&kode_mk=<?php echo $hasil['kode_mk']; ?>" class="btn btn-sm btn-primary">Ubah</a>
+                                <a href="?page=mkhapus&&kode_mk=<?php echo $hasil['kode_mk']; ?>" onclick="return confirm('Data akan dihapus?')" class="btn btn-sm btn-warning">Hapus</a>
                             </td>
                         </tr>
                     <?php }; ?>
