@@ -100,13 +100,13 @@
             </div>
 
             <div class="row mb-3">
-                <label for="sks" class="col-sm-4 col-form-label">Jumlah SKS</label>
+                <label for="semester" class="col-sm-4 col-form-label">Semester</label>
                 <div class="col-sm-8">
-                    <select class="form-select" id="sks" name="sks">
-                        <option value="Ganjil" <?php if ($hasil['sks'] == "Ganjil") {
+                    <select class="form-select" id="semester" name="semester">
+                        <option value="Ganjil" <?php if ($hasil['semester'] == "Ganjil") {
                                                     echo "selected";
                                                 } ?>>Ganjil</option>
-                        <option value="Genap" <?php if ($hasil['sks'] == "Genap") {
+                        <option value="Genap" <?php if ($hasil['semester'] == "Genap") {
                                                     echo "selected";
                                                 } ?>>Genap</option>
                     </select>
