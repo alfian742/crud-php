@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 07 Jan 2024 pada 10.05
+-- Waktu pembuatan: 14 Jan 2024 pada 03.14
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -98,6 +98,26 @@ INSERT INTO `tb_mahasiswa` (`nim`, `nama_mahasiswa`, `email`, `prodi`, `semester
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_mengajar`
+--
+
+CREATE TABLE `tb_mengajar` (
+  `id` int(11) NOT NULL,
+  `nidn` char(10) NOT NULL,
+  `kode_mk` char(5) NOT NULL,
+  `semester` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `tb_mengajar`
+--
+
+INSERT INTO `tb_mengajar` (`id`, `nidn`, `kode_mk`, `semester`) VALUES
+(1, '1234567890', '10010', 7);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_mk`
 --
 
@@ -173,6 +193,12 @@ ALTER TABLE `tb_mahasiswa`
   ADD PRIMARY KEY (`nim`);
 
 --
+-- Indeks untuk tabel `tb_mengajar`
+--
+ALTER TABLE `tb_mengajar`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `tb_mk`
 --
 ALTER TABLE `tb_mk`
@@ -193,6 +219,12 @@ ALTER TABLE `tb_user`
 --
 ALTER TABLE `tb_khs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_mengajar`
+--
+ALTER TABLE `tb_mengajar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
