@@ -100,8 +100,9 @@
                  </table>
              </div>
 
-             <div class="d-flex justify-content-end">
+             <div class="d-flex justify-content-end gap-2">
                  <a href="?page=krstambah&&nim=<?php echo $hasilMahasiswa['nim']; ?>" class="btn btn-primary">Tambah Mata Kuliah</a>
+                 <a href="krscetak.php" class="btn btn-warning" target="_blank">Cetak KRS</a>
              </div>
          <?php } ?>
      </div>
