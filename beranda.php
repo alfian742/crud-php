@@ -54,7 +54,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                         <a href="beranda.php" class="list-group-item list-group-item-action active">Beranda</a>
                         <?php if ($_SESSION['level'] == "Mahasiswa") { ?>
                             <a href="?page=krsisi" class="list-group-item list-group-item-action">Isi KRS</a>
-                            <a href="#" class="list-group-item list-group-item-action">Lihat KHS</a>
+                            <a href="?page=khs" class="list-group-item list-group-item-action">Lihat KHS</a>
                         <?php } elseif ($_SESSION['level'] == "Dosen") { ?>
                             <a href="#" class="list-group-item list-group-item-action">Cek KRS</a>
                             <a href="#" class="list-group-item list-group-item-action">Input Nilai</a>
