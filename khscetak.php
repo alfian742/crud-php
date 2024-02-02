@@ -23,8 +23,11 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                     <?php
                     include 'koneksi.php';
 
-                    if ($_SESSION['level'] == "Mahasiswa") {
-                        $sqlMahasiswa = mysqli_query($koneksi, "SELECT * FROM tb_mahasiswa WHERE email='$_SESSION[email]'");
+                    if (isset($_GET['nim'])) {
+                        $nim = $_GET['nim'];
+                        $semester = $_GET['semester'];
+
+                        $sqlMahasiswa = mysqli_query($koneksi, "SELECT * FROM tb_mahasiswa WHERE nim='$nim'");
                         $hasilMahasiswa = mysqli_fetch_array($sqlMahasiswa);
                     ?>
                         <div class="table-responsive mb-4">
@@ -39,7 +42,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                                     <tr class="align-middle">
                                         <td>Nomor Induk Mahasiswa</td>
                                         <td>:</td>
-                                        <td><?php echo $hasilMahasiswa['nim']; ?></td>
+                                        <td><?php echo $nim ?></td>
                                     </tr>
                                     <tr class="align-middle">
                                         <td>Program Studi</td>
@@ -49,7 +52,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                                     <tr class="align-middle">
                                         <td>Semester</td>
                                         <td>:</td>
-                                        <td><?php echo $hasilMahasiswa['semester']; ?></td>
+                                        <td><?php echo $semester; ?></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -76,8 +79,8 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                                     $sqlKHS = "SELECT * FROM tb_mahasiswa, tb_mk, tb_khs 
                                         WHERE tb_mahasiswa.nim=tb_khs.nim 
                                         AND tb_mk.kode_mk=tb_khs.kode_mk 
-                                        AND tb_khs.nim='$hasilMahasiswa[nim]' 
-                                        AND tb_khs.semester='$hasilMahasiswa[semester]' 
+                                        AND tb_khs.nim='$nim' 
+                                        AND tb_khs.semester='$semester' 
                                         ORDER BY tb_mk.kode_mk ASC";
 
                                     $queryKHS = mysqli_query($koneksi, $sqlKHS);
@@ -128,8 +131,8 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                                             <?php
                                             $sqlSKS = "SELECT SUM(sks) AS total FROM tb_mk, tb_khs 
                                                 WHERE tb_mk.kode_mk=tb_khs.kode_mk 
-                                                AND tb_khs.nim='$hasilMahasiswa[nim]'
-                                                AND tb_khs.semester='$hasilMahasiswa[semester]'";
+                                                AND tb_khs.nim='$nim'
+                                                AND tb_khs.semester='$semester'";
 
                                             $querySKS = mysqli_query($koneksi, $sqlSKS);
 
@@ -146,18 +149,27 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                             </table>
                         </div>
 
-                        <div class="mb-4">
-                            <?php $ipk = $totalAkumulasiNilai / $jumlahSKS; ?>
-                            <p>Indeks Prestasi Semester Ini = <?php echo number_format($ipk, 2); ?></p>
+                        <div class="fw-bold mb-4">
+                            <?php $ip = $totalAkumulasiNilai / $jumlahSKS; ?>
+                            <p>Indeks Prestasi Semester Ini = <?php echo number_format($ip, 2); ?></p>
                         </div>
 
-                        <div class="row justify-content-start mb-4">
-                            <div class="col-12">
-                                <div>
-                                    <div><?= 'Mataram, ' . date('d F Y'); ?></div>
-                                    <div class="pb-4">Kaprodi,</div>
-                                    <div class="pt-4 fw-bold">(SALMAN, S.T., M.TI.)</div>
-                                    <div class="fw-bold">NIK. 01.08.04</div>
+                        <div class="row mb-4">
+                            <div class="col-6">
+                                <div class="d-flex flex-column">
+                                    <span>Keterangan:</span>
+                                    <span>NM = Nilai Mutu</span>
+                                    <span>AM = Angka Mutu</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="d-flex justify-content-end">
+                                    <div class="d-flex flex-column">
+                                        <span><?= 'Mataram, ' . date('d F Y'); ?></span>
+                                        <span class="pb-4">Kaprodi,</span>
+                                        <span class="pt-4 fw-bold">(SALMAN, S.ST., M.TI.)</span>
+                                        <span class="fw-bold">NIK. 01.08.04</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
