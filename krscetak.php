@@ -117,7 +117,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                                 <div class="text-center">
                                     <div>Mengesahkan</div>
                                     <div class="pb-4">Dosen Wali,</div>
-                                    <div class="pt-4 fw-bold">(Dr. Muhammad Multazam, S.Kom., M.Kom.)</div>
+                                    <div class="pt-4 fw-bold text-decoration-underline">Dr. Muhammad Multazam, S.Kom., M.Kom.</div>
                                     <div class="fw-bold">NIK. 01.08.04</div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                                 <div class="text-center">
                                     <div><?= 'Mataram, ' . date('d F Y'); ?></div>
                                     <div class="pb-4">Mahasiswa Yang Bersangkutan,</div>
-                                    <div class="pt-4 fw-bold"><?= '(' . $hasilMahasiswa['nama_mahasiswa'] . ')'; ?></div>
+                                    <div class="pt-4 fw-bold text-decoration-underline"><?= $hasilMahasiswa['nama_mahasiswa']; ?></div>
                                     <div class="fw-bold"><?= 'NIM. ' . $hasilMahasiswa['nim']; ?></div>
                                 </div>
                             </div>

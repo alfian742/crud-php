@@ -91,6 +91,7 @@
                                             AND tb_khs.nim='$hasilMahasiswa[nim]' 
                                             AND tb_khs.semester='$semester' 
                                             ORDER BY tb_mk.kode_mk ASC";
+
                                 $queryKHS = mysqli_query($koneksi, $sqlKHS);
 
                                 while ($hasilKHS = mysqli_fetch_array($queryKHS)) {
@@ -137,16 +138,16 @@
                                  <th colspan="5">Jumlah</th>
                                  <th>
                                      <?php
-
-                                        $sqlSKS = "SELECT SUM(sks) AS total_sks FROM tb_mk, tb_khs 
+                                        $sqlSKS = "SELECT SUM(sks) AS total FROM tb_mk, tb_khs 
                                                     WHERE tb_mk.kode_mk=tb_khs.kode_mk 
                                                     AND tb_khs.nim='$hasilMahasiswa[nim]'
                                                     AND tb_khs.semester='$semester'";
+
                                         $querySKS = mysqli_query($koneksi, $sqlSKS);
 
                                         $hasilSKS = mysqli_fetch_array($querySKS);
 
-                                        $jumlahSKS = isset($hasilSKS['total_sks']) ? $hasilSKS['total_sks'] : 0;
+                                        $jumlahSKS = isset($hasilSKS['total']) ? $hasilSKS['total'] : 0;
 
                                         echo $jumlahSKS . " SKS";
                                         ?>
@@ -160,26 +161,18 @@
                  <div class="fw-bold mb-4">
                      <?php
                         if ($jumlahSKS != 0) {
-                            $ip = $totalAkumulasiNilai / $jumlahSKS;
-                            echo "<p>Indeks Prestasi Semester Ini = " . number_format($ip, 2) . "</p>";
+                            $ipk = $totalAkumulasiNilai / $jumlahSKS;
+                            echo "Indeks Prestasi Semester Ini = " .  number_format($ipk, 2);
                         } else {
-                            echo "<p>Indeks Prestasi Semester Ini = 0.00</p>";
+                            echo "Indeks Prestasi Semester Ini = 0.00";
                         }
                         ?>
                  </div>
 
-                 <div class="d-flex flex-column">
-                     <span>Keterangan:</span>
-                     <span>NM = Nilai Mutu</span>
-                     <span>AM = Angka Mutu</span>
-                 </div>
-
                  <div class="d-flex justify-content-end gap-2">
-                     <a href="khscetak.php?nim=<?= $hasilMahasiswa['nim']; ?>&&semester=<?= $semester; ?>" class="btn btn-warning" target="_blank">Cetak KHS</a>
+                     <a href="khscetak.php?nim=<?php echo $hasilMahasiswa['nim']; ?>&semester=<?php echo $semester; ?>" class="btn btn-warning" target="_blank">Cetak KHS</a>
                  </div>
          <?php
-                } else {
-                    echo "";
                 }
             }
             ?>

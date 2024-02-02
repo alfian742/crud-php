@@ -30,6 +30,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                         $sqlMahasiswa = mysqli_query($koneksi, "SELECT * FROM tb_mahasiswa WHERE nim='$nim'");
                         $hasilMahasiswa = mysqli_fetch_array($sqlMahasiswa);
                     ?>
+
                         <div class="table-responsive mb-4">
                             <table class="table table-borderless">
                                 <tbody>
@@ -42,7 +43,7 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                                     <tr class="align-middle">
                                         <td>Nomor Induk Mahasiswa</td>
                                         <td>:</td>
-                                        <td><?php echo $nim ?></td>
+                                        <td><?php echo $hasilMahasiswa['nim']; ?></td>
                                     </tr>
                                     <tr class="align-middle">
                                         <td>Program Studi</td>
@@ -77,11 +78,11 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                                     $totalAkumulasiNilai = 0;
 
                                     $sqlKHS = "SELECT * FROM tb_mahasiswa, tb_mk, tb_khs 
-                                        WHERE tb_mahasiswa.nim=tb_khs.nim 
-                                        AND tb_mk.kode_mk=tb_khs.kode_mk 
-                                        AND tb_khs.nim='$nim' 
-                                        AND tb_khs.semester='$semester' 
-                                        ORDER BY tb_mk.kode_mk ASC";
+                                                WHERE tb_mahasiswa.nim=tb_khs.nim 
+                                                AND tb_mk.kode_mk=tb_khs.kode_mk 
+                                                AND tb_khs.nim='$hasilMahasiswa[nim]' 
+                                                AND tb_khs.semester='$semester' 
+                                                ORDER BY tb_mk.kode_mk ASC";
 
                                     $queryKHS = mysqli_query($koneksi, $sqlKHS);
 
@@ -130,15 +131,15 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                                         <th>
                                             <?php
                                             $sqlSKS = "SELECT SUM(sks) AS total FROM tb_mk, tb_khs 
-                                                WHERE tb_mk.kode_mk=tb_khs.kode_mk 
-                                                AND tb_khs.nim='$nim'
-                                                AND tb_khs.semester='$semester'";
+                                                        WHERE tb_mk.kode_mk=tb_khs.kode_mk 
+                                                        AND tb_khs.nim='$hasilMahasiswa[nim]'
+                                                        AND tb_khs.semester='$semester'";
 
                                             $querySKS = mysqli_query($koneksi, $sqlSKS);
 
                                             $hasilSKS = mysqli_fetch_array($querySKS);
 
-                                            $jumlahSKS = $hasilSKS['total'];
+                                            $jumlahSKS = isset($hasilSKS['total']) ? $hasilSKS['total'] : 0;
 
                                             echo $jumlahSKS . " SKS";
                                             ?>
@@ -150,8 +151,14 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                         </div>
 
                         <div class="fw-bold mb-4">
-                            <?php $ip = $totalAkumulasiNilai / $jumlahSKS; ?>
-                            <p>Indeks Prestasi Semester Ini = <?php echo number_format($ip, 2); ?></p>
+                            <?php
+                            if ($jumlahSKS != 0) {
+                                $ipk = $totalAkumulasiNilai / $jumlahSKS;
+                                echo "Indeks Prestasi Semester Ini = " .  number_format($ipk, 2);
+                            } else {
+                                echo "Indeks Prestasi Semester Ini = 0.00";
+                            }
+                            ?>
                         </div>
 
                         <div class="row mb-4">
@@ -165,9 +172,9 @@ if (isset($_SESSION['email']) and isset($_SESSION['level'])) {
                             <div class="col-6">
                                 <div class="d-flex justify-content-end">
                                     <div class="d-flex flex-column">
-                                        <span><?= 'Mataram, ' . date('d F Y'); ?></span>
+                                        <span><?php echo 'Mataram, ' . date('d F Y'); ?></span>
                                         <span class="pb-4">Kaprodi,</span>
-                                        <span class="pt-4 fw-bold">(SALMAN, S.ST., M.TI.)</span>
+                                        <span class="pt-4 fw-bold text-decoration-underline">SALMAN, S.ST., M.TI.</span>
                                         <span class="fw-bold">NIK. 01.08.04</span>
                                     </div>
                                 </div>
